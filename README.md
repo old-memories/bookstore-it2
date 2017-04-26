@@ -1,2 +1,4 @@
 # bookstore-it2
-Java version of bookstore  Using Hibernate and Struts
+Java version of bookstore
+
+Using Hibernate and Struts
