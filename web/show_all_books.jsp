@@ -9,7 +9,7 @@
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Book Store</title>
+    <title>Search</title>
     <script src="<%=path %>/js/jquery-1.12.2.min.js"></script>
     <script src="<%=path %>/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=path %>/js/cart.js"></script>
@@ -18,7 +18,7 @@
 <div id="templatemo_container">
     <div id="templatemo_menu">
         <ul>
-            <li><a href="<%=basePath%>index" class="current">Home</a></li>
+            <li><a href="<%=basePath%>index">Home</a></li>
             <li><a href="<%=basePath%>403.jsp">admin</a></li>
             <li>
                 <a><form class="search-form" role="search" method="get" action="<%=path %>/item/action_search">
@@ -36,7 +36,7 @@
                 <li><a style="float: right; color:red" href="<%=path%>/auth/action_logout">exit</a></li>
                 <li><a  style="float: right" href="<%=path %>/order/action_allOrders">Welcome:
                     <s:property value="#session.user.username"/></a></li>
-        </s:else>
+            </s:else>
             <li><a style="float: right" href="#" onclick="show_cart()">Cart</a></li>
         </ul>
     </div> <!-- end of menu -->
@@ -73,20 +73,31 @@
         </div> <!-- end of content left -->
 
         <div id="templatemo_content_right">
-            <s:iterator value="#books" status="st">
-                <div class="templatemo_product_box">
+            <s:if test="#books==null">
+             <h1>No Book Found.</h1>
+            </s:if>
+            <s:else>
 
-                <h1>Book:<s:property value="bookname"/><span> Author:<s:property value="author"/></span></h1>
-                <img src="<%=path%>/<s:property value="image"/>" alt="image" />
-                <div class="product_info">
-                    <h3>Price:<s:property value="price/100.0"/></h3>
-                    <div class="detail_button"><a href="<%=path%>/item/action_showBookByid?bookid=<s:property value="bookid"/>">Detail</a></div>
-                </div>
-                <div class="cleaner">&nbsp;</div>
-            </div>
 
-            <div class="<s:if test="#st.even">cleaner_with_height</s:if><s:else>cleaner_with_width</s:else>">&nbsp;</div>
-            </s:iterator>
+                <s:iterator value="#books" status="st">
+                    <div class="templatemo_product_box">
+
+                        <h1>Book:<s:property value="bookname"/><span> Author:<s:property value="author"/></span></h1>
+                        <img src="<%=path%>/<s:property value="image"/>" alt="image" />
+                        <div class="product_info">
+                            <h3>Price:<s:property value="price/100.0"/></h3>
+                            <div class="detail_button"><a href="<%=path%>/item/action_showBookByid?bookid=<s:property value="bookid"/>">Detail</a></div>
+                        </div>
+                        <div class="cleaner">&nbsp;</div>
+                    </div>
+
+                    <div class="<s:if test="#st.even">cleaner_with_height</s:if><s:else>cleaner_with_width</s:else>">&nbsp;</div>
+                </s:iterator>
+
+
+
+            </s:else>
+
 
         </div> <!-- end of content right -->
 
